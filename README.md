@@ -65,7 +65,10 @@ pdflatex first_test_struct.tex
 
 # 6. open that file with a PDF viewer.  It's gonna be ugly because the runs were super short
 open first_test_struct.pdf
+```
 
+Then, if you want to run Colony:
+```sh
 # 7. If you are so inclined run the samples from these 7 populations in the
 #    test data set through Colony to identify siblings within each population sample which
 #    is assumed to consist of a single cohort.  Here we spread the effort across 7 
@@ -91,20 +94,32 @@ sudo date 0613182785  # change the date (requires admin privileges) or you
 # 8. At the end of that.  Look at all the output files that you have
 ls Collections/*/FirstColonyRun
 
+```
+
+
+Then, if you want to do Colony, but permute the genetic data around, you can run the
+following block.  Miraculously, `sgm_perm` runs on 64 bit...
+
+```sh
 # 8.5 Note that if you had wanted to do another set of Colony runs just like those
 #     ones you just did, but have the data permuted amongst all the individuals
 #     in each data set (using Eric's sgm_perm program) you could do that like this:
 #     (the key is the "1" near the end of the line --- that is what tell the script
 #     to permute things)
 ./script/RunAllColony.sh -o " -P \"1 0\" -s \"2 2.1 3.2 \" "  FirstColonyRun_Permed  1 7 
+```
 
+Finally you can make summaries of a lot of things:
 
+```sh
 # 9. If you want to summarize the Genepop HW and LD tests that got done in 
 #    Step #1, you can do the following.  It tells you which summary files
 #    were produced and where to find them.
 cd ../../  # change directories back up to the "arena"
 ../script/SummarizeAll.sh FIRST_TEST 
 ```
+
+## slg_pipe format
 
 So, in case you are wondering what slg_pipe format is, it is basically your typical "2-column" genetic format.  Some examples are in the test directory.   The first column are identifiers for individuals and the remaining columns are the genetic data.  There should be two columns for each locus, corresponding to the two alleles.  The first row must be the column headers.  The header for each column of a locus must be identical (i.e. the locus name occurs at the top of each column). **Note that the file must be tab delimited and the first column in the first row must be empty.** The names of the individuals must have a population identifer composed of letters and an individual ID number which must be entirely numeric.  Because of limitations in some of the programs used in the pipeline, you should strive for no more than 5 letters in the population name and no more than 3 numerals in the ID number.  Here is a tiny example file:
 ```
