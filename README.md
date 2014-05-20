@@ -11,7 +11,12 @@ for Mac, and the code is not available in this repository, so
 don't plan on using it on a different platform.
 
 
+## Using it
+Here is how you use it
 
+First, get it:
+```
+git clone 
 
 
 
