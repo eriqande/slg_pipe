@@ -8,7 +8,7 @@ DO_PHYLIP_STUFF=1;          # 1 means build CSE-NJ tree and consensus tree and t
                             # bootstrap values back to the distance tree
 DO_GENEPOP=1                # must be 1 to do any genepop analyses at all
 DO_GENEPOP_HWE=1;           # 1 means do Guo and Thompson MCMC Fisher Exact test for HWE and 0 means do not do it
-DO_GENEPOP_LD=1;            # 1 means test for LD between all pairs of loci and 0 means do not do it
+DO_GENEPOP_LD=0;            # 1 means test for LD between all pairs of loci and 0 means do not do it
 PREPARE_COLONY_AREA=1;      # 1 means make the ColonyArea with everything needed to run Colony on each 
                             # separate population
 PREPARE_FSTAT_DIR=1;        # make the fstat directory which gives you an input file for fstat
