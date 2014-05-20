@@ -2,3 +2,13 @@ arena
 arena/*
 .DS_Store
 *~
+bin/Genepop
+bin/consense
+bin/gendist
+bin/neighbor
+bin/seqboot
+inputs/ForColony/bin/
+inputs/ForStructure/bin/
+inputs/ForStructure/structure2.3.4
+inputs/parallel
+pc/
