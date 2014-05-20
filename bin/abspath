@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+# Try to get a 'realpath(3)' in perl
+# realpath - resolve a given path/file to its real (complete) path/file
+# Written by Jeff Stoner <leapfrog@freeshell.org>
+# Copyright 2002 Jeff Stoner
+# This program is released under the GNU General Protection License v2.0 or later.
+# For license details, please see: http://www.gnu.org/licenses/licenses.html#GPL
+
+# this version was modified slightly by Eric Anderson in Feb 2007.  And he
+# renamed it to abspath.
+
+use strict;
+use Cwd 'abs_path';
+use File::Spec;
+
+my ($volume, $path, $file, $absolute_path);
+
+print STDERR "Usage: abspath  <file1> <file2> <file3>...<fileN>\n" unless @ARGV;
+foreach (@ARGV) {
+    if (! -e $_) { print STDERR "$_ does not exist or is not accessible\n"; next };
+    ($volume, $path, $file) = File::Spec->splitpath($_);
+    $path = $path ? $path : Cwd->cwd();
+    $absolute_path = $volume ? $volume . $path : $path;
+    print abs_path($absolute_path) . "/$file\n";
+}
+

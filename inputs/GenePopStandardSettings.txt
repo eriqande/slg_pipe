@@ -1,0 +1,5 @@
+GenepopInputFile=genos_genepop.txt
+Mode=Batch
+Dememorisation=10000
+BatchLength=5000
+BatchNumber=100

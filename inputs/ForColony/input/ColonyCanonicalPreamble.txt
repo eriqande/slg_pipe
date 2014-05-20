@@ -1,0 +1,18 @@
+'COLLECTION'
+'OUTFIX'  ! outfile prefix
+NUMOFFS        ! Number of offspring in the sample
+NUMLOCS        ! Number of loci
+SEED      ! Seed for random number generator
+UPDATE_FREQS         ! 0/1=Not updating/updating allele frequency
+2         ! 2/1=Dioecious/Monoecious species
+0         ! 0/1=Diploid species/HaploDiploid species
+0  1      ! 0/1=Polygamy/Monogamy for males & females
+0         ! 0/1=with/without sibship size prior
+0         ! 0/1=Unknown/Known population allele frequency
+NUMRUNS         ! Number of runs
+RUNLENGTH         ! Length of run (1/2/3)
+1         ! 0/1=Monitor method by Iterate#/Time in second
+1         ! Monitor interval in Iterate# / in seconds
+0         ! Windows version
+INFERENCE_METHOD         !  1=Full Likelihood method 0=Pairwise method.
+LIKE_PRECIS         ! Precision 1/2/3=low/medium/High

@@ -1,0 +1,9 @@
+PChor	PennChorro	PennChorro Creek near SLO
+NotPop	ABogusPop	Just for testing---a bogus population
+Ssim	SanSimeon	San Simeon Creek near Hearst Castle
+WMont	Willow Creek	Willow Creek in Monterey County
+BMont	Big Creek M	Big Creek in Monterey County
+BSur	Big Sur	Big Sur Creek in Monterey County
+CMont	Carmel River	Carmel River Monterey
+BSur    Big Sur Big Sur Creek in Monterey County
+Corra	Corralitos Creek	Corralitos Creek
