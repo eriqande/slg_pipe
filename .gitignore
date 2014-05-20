@@ -1,5 +1,5 @@
-arena
-arena/*
+#arena
+#arena/*
 .DS_Store
 *~
 bin/Genepop
