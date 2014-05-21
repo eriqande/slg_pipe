@@ -9,7 +9,7 @@ Anyone is welcome to use this, though I can't promise that I will be helpful try
 Here is how you use it
 
 
-```shell
+```sh
 # First, get it:
 git clone https://github.com/eriqande/slg_pipe.git
 
