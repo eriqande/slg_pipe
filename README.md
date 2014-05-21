@@ -31,9 +31,32 @@ cd slg_pipe/arena/
 ../script/Do_standard_analyses.sh
 ```
 
-So, in case you are wondering what slg_pipe format is, it is basically your typical "2-column" genetic format.  Some examples are in the test directory.
+So, in case you are wondering what slg_pipe format is, it is basically your typical "2-column" genetic format.  Some examples are in the test directory. **Note that the file must be tab delimited and the first column in the first row must be empty.**  The names of the individuals must have a population identifer composed of letters and an individual ID number which must be entirely numeric.  Because of limitations in some of the programs used in the pipeline, you should strive for no more than 5 letters in the population name and no more than 3 numerals in the ID number.  Here is a tiny example file:
+```
+  Omy1011	Omy1011	Omy77	Omy77	OtsG243	OtsG243
+PChor001	164	168	98	102	58	84
+PChor002	164	168	98	98	58	58
+PChor003	168	172	102	132	58	84
+PChor004	164	164	98	102	58	84
+PChor005	164	168	102	106	58	84
+PChor006	168	172	102	132	84	84
+CMont001	180	188	104	108	58	84
+CMont002	168	172	92	96	58	84
+CMont003	168	172	102	106	58	84
+CMont004	156	168	96	106	58	84
+CMont005	172	200	102	128	58	58
+CMont006	168	176	104	104	58	84
+Bould001	164	176	110	110	58	84
+Bould002	164	188	0	0	84	84
+Bould003	164	168	0	0	58	84
+Bould004	188	192	0	0	58	84
+Bould005	168	172	96	96	58	84
+Bould006	164	168	0	0	58	84
+```
 
-Here is an example analysis from whence you can figure out what the file formats need to be, etc.
+Note that missing data are denoted by 0's (zeroes) and alleles are denoted by numbers (it is probably best to denote them by numbers between 100 and 999).
+
+Here is an example analysis on the test data:  
 ```
 # issue this command in the "arena" directory
 ../script/Do_standard_analyses.sh ../test/full_redo_slg_pipe.txt ../test/full_redo_pops.txt ../test/full_redo_loci.txt  FullRedoTest DefaultSettingsStandard.sh
