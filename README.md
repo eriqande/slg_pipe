@@ -57,14 +57,14 @@ Bould006	164	168	0	0	58	84
 Note that missing data are denoted by 0's (zeroes) and alleles are denoted by numbers (it is probably best to denote them by numbers between 100 and 999).
 
 Here is an example analysis on the test data:  
-```shell
+```sh
 # issue this command in the "arena" directory
 ../script/Do_standard_analyses.sh ../test/full_redo_slg_pipe.txt ../test/full_redo_pops.txt ../test/full_redo_loci.txt  FullRedoTest DefaultSettingsStandard.sh
 ```
 The output from that tells you what else you can do.
 
 If you want some summaries, try this once it has finished:
-```shell
+```sh
 # do this in the arena directory
 ../script/SummarizeAll.sh FullRedoTest
 ```
