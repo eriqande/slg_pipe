@@ -214,7 +214,7 @@ be in that directory."
 	echo "About to start HWE probability test (Guo and Thompson) for each locus"
 	echo "Settings are:"
 	cat GenePopStandardSettings.txt;
-	CALL="Genepop SettingsFile=GenePopStandardSettings.txt MenuOptions=1.3"
+	CALL="../../../bin/Genepop SettingsFile=GenePopStandardSettings.txt MenuOptions=1.3"
 	echo "Launching Genepop with the call"
 	echo $CALL
 	echo "and redirecting stdout output to LOG_genepop_HWE_prob_tests.txt"
