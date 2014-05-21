@@ -2,6 +2,9 @@
 arena/*
 .DS_Store
 *~
+README.html
+
+# here are the paths for all the binaries
 bin/Genepop
 bin/consense
 bin/gendist
