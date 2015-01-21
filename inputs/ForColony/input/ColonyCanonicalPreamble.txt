@@ -5,6 +5,7 @@ NUMLOCS        ! Number of loci
 SEED      ! Seed for random number generator
 UPDATE_FREQS         ! 0/1=Not updating/updating allele frequency
 2         ! 2/1=Dioecious/Monoecious species
+0         ! 0/1=No inbreeding/inbreeding (This option not compatible with the old version of colony)  <-- don't alter this line---the script uses it to remove this line when necessary
 0         ! 0/1=Diploid species/HaploDiploid species
 0  1      ! 0/1=Polygamy/Monogamy for males & females
 0         ! 0/1=with/without sibship size prior

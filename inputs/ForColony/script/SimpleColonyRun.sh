@@ -9,6 +9,7 @@ RUN_LENGTH=1;
 LIKE_PRECIS=1;
 NUMRUNS=1;
 INFERENCE_METHOD=1;
+BINARY_BASENAME=colony2s.out;  # be default it uses the new colony
 
 function usage {
     echo Syntax:
@@ -56,6 +57,7 @@ The optional flag options have the following effects:
 -p LikPre      :   Set Likelihood precision to LikPre (must be 1, 2, or 3).
 -n NumRuns     :   Set it up to do NumRuns different runs with the data set.
 -x             :   Set the inference method to Pairwise (0) rather than Full Likelihood (1)
+-o             :   Use the old version of Colony (i.e. the 2009/2010 as opposed to 2013/2014 version)
 
 
 
@@ -69,7 +71,7 @@ if [ $# -eq 0 ]; then
 fi;
 
 # use getopts so you can pass it -n 50, for example. 
-while getopts ":d:m:l:Lfr:p:n:x" opt; do
+while getopts ":d:m:l:Lfr:p:n:xo" opt; do
     case $opt in
 	d    )  DROPOUTRATE=$OPTARG;
 	    ;;
@@ -88,6 +90,8 @@ while getopts ":d:m:l:Lfr:p:n:x" opt; do
 	n    )  NUMRUNS=$OPTARG;
 	    ;;
 	x    )  INFERENCE_METHOD=0;
+	    ;;
+	o    )  BINARY_BASENAME=Colony2;
 	    ;;
 	\?   )
 	    usage
@@ -178,11 +182,19 @@ echo $NumLocToUse $DROPOUTRATE $MISCALLRATE | awk '
 ) > Colony2.dat;
 
 
+# If we are using the old version of Colony (i.e. before the stuff jinliang put in
+# to reduce large full sibgroup splits) then we have to delete the inbreeding line from the Colony2.dat
+if [ $BINARY_BASENAME = "Colony2" ]; then
+	awk '/This option not compatible with the old version of colony/ {next} {print}' Colony2.dat > zzttuutmp
+	mv zzttuutmp Colony2.dat
+fi
+
+
 
 
 # then start Colony and redirect output to StdoutColony.txt
 # and redirect stderr there too!
-$CURDIR/bin/Colony2  >  StdoutColony.txt 2>&1;
+$CURDIR/bin/$BINARY_BASENAME  >  StdoutColony.txt 2>&1;
 
 
 # when it is done, change back to the directory you started from
