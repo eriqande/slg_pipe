@@ -12,6 +12,9 @@ bin/neighbor
 bin/seqboot
 inputs/ForColony/bin/
 inputs/ForStructure/bin/
+inputs/ForStructure/clump_and_distruct/bin/
 inputs/ForStructure/structure2.3.4
 inputs/parallel
 pc/
+.Rproj.user
+.Rhistory
