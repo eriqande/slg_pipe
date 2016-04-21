@@ -31,6 +31,17 @@ cd slg_pipe/arena/
 ../script/Do_standard_analyses.sh
 ```
 
+Then, in order to do a test run of a small data set to make sure that everything is functioning correctly,
+you can do this:
+```sh
+# 1. Run the standard analysis script from within the "arena" directory
+# This creates the output directory FIRST_TEST
+../script/Do_standard_analyses.sh ../test/test1_genotypes.txt ../test/test1_all_pops.txt ../test/test1_all_loci.txt FIRST_TEST ../settings/QuickRunsTestSettings.sh 
+
+
+
+```
+
 So, in case you are wondering what slg_pipe format is, it is basically your typical "2-column" genetic format.  Some examples are in the test directory.   The first column are identifiers for individuals and the remaining columns are the genetic data.  There should be two columns for each locus, corresponding to the two alleles.  The first row must be the column headers.  The header for each column of a locus must be identical (i.e. the locus name occurs at the top of each column). **Note that the file must be tab delimited and the first column in the first row must be empty.** The names of the individuals must have a population identifer composed of letters and an individual ID number which must be entirely numeric.  Because of limitations in some of the programs used in the pipeline, you should strive for no more than 5 letters in the population name and no more than 3 numerals in the ID number.  Here is a tiny example file:
 ```
   Omy1011	Omy1011	Omy77	Omy77	OtsG243	OtsG243
