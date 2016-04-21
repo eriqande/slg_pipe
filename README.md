@@ -23,7 +23,9 @@ tar -xvf slg_pipe_binaries.tar
 
 # now copy the binaries into the directory tree of the 
 # repository using rsync
-rsync -avh slg_pipe_binaries/* slg_pipe
+# rsync -avh slg_pipe_binaries/* slg_pipe  # this was the old one.
+rsync -avh slg_pipe_binaries-2016-04-21/* slg_pipe
+
 
 # now you should be good to go.  Enter the "arena" directory
 # and get the directions:
@@ -38,8 +40,24 @@ you can do this:
 # This creates the output directory FIRST_TEST
 ../script/Do_standard_analyses.sh ../test/test1_genotypes.txt ../test/test1_all_pops.txt ../test/test1_all_loci.txt FIRST_TEST ../settings/QuickRunsTestSettings.sh 
 
+# 2. change into the output directory
+cd FIRST_TEST
 
+# 3. Do the very short structure run across 5 processors
+cd StructureArea/arena
+nohup ../script/ExecuteStructureRuns.sh  5  > BIG_LOG.txt  2>&1 &
 
+# 4. clump the output, create distruct plots of it, and latex a file of results
+# Here we tell it to make each distruct plot 6 inches wide
+cd ../clump_and_distruct
+./script/ClumpAndDistructAll.sh 6
+
+# 5. Then we put all the distruct plots together in a LaTeX document
+./script/LaTeXify.sh -b ./final_pdf "2 3 4 5" > first_test_struct.tex
+pdflatex first_test_struct.tex 
+
+# 6. open that file with a PDF viewer.  It's gonna be ugly because the runs were super short
+open first_test_struct.pdf
 ```
 
 So, in case you are wondering what slg_pipe format is, it is basically your typical "2-column" genetic format.  Some examples are in the test directory.   The first column are identifiers for individuals and the remaining columns are the genetic data.  There should be two columns for each locus, corresponding to the two alleles.  The first row must be the column headers.  The header for each column of a locus must be identical (i.e. the locus name occurs at the top of each column). **Note that the file must be tab delimited and the first column in the first row must be empty.** The names of the individuals must have a population identifer composed of letters and an individual ID number which must be entirely numeric.  Because of limitations in some of the programs used in the pipeline, you should strive for no more than 5 letters in the population name and no more than 3 numerals in the ID number.  Here is a tiny example file:
