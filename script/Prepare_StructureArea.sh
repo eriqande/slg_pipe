@@ -1,7 +1,7 @@
 
 STEPS="
   1. Set up an output directory with subddirectories bin, input, script, arena, and data
-  2. Convert data files to a sturcture readable format.  It will save them with 
+  2. Convert data files to a structure readable format.  It will save them with 
      their original names + \"_dat0X\", where X is the number in which it was read in
      padded with a zero if need be. 
   3. Prepare some other files with the population indexes, number of indivs. etc. 
