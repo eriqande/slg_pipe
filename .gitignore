@@ -16,5 +16,9 @@ inputs/ForStructure/clump_and_distruct/bin/
 inputs/ForStructure/structure2.3.4
 inputs/parallel
 pc/
+
+# and here is where I store the binary packs.  Don't commit/push those!
+Binary-Packs
+
 .Rproj.user
 .Rhistory
