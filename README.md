@@ -38,6 +38,17 @@ you can do this:
 # This creates the output directory FIRST_TEST
 ../script/Do_standard_analyses.sh ../test/test1_genotypes.txt ../test/test1_all_pops.txt ../test/test1_all_loci.txt FIRST_TEST ../settings/QuickRunsTestSettings.sh 
 
+# 2. change into the output directory
+cd FIRST_TEST
+
+# 3. Do the very short structure run across 5 processors
+cd StructureArea/arena
+nohup ../script/ExecuteStructureRuns.sh  5  > BIG_LOG.txt  2>&1 &
+
+# 4. clump the output, create distruct plots of it, and latex a file of results
+# Here we tell it to make each distruct plot 6 inches wide
+cd ../clump_and_distruct
+./script/ClumpAndDistructAll.sh 6
 
 
 ```
