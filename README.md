@@ -15,7 +15,7 @@ git clone https://github.com/eriqande/slg_pipe.git
 
 # then get the external binaries that need to go with it
 # For now just download them in a tarball from here:
-curl -o slg_pipe_binaries.tar.gz  https://dl.dropboxusercontent.com/u/19274778/slg_pipe_binaries.tar.gz
+curl -o slg_pipe_binaries.tar.gz  https://dl.dropboxusercontent.com/u/19274778/slg_pipe_binaries-2016-04-21.tar.gz
 
 # extract the tarball
 gunzip slg_pipe_binaries.tar.gz 
@@ -23,8 +23,7 @@ tar -xvf slg_pipe_binaries.tar
 
 # now copy the binaries into the directory tree of the 
 # repository using rsync
-# rsync -avh slg_pipe_binaries/* slg_pipe  # this was the old one.
-rsync -avh slg_pipe_binaries-2016-04-21/* slg_pipe
+rsync -avh slg_pipe_binaries/* slg_pipe
 
 
 # now you should be good to go.  Enter the "arena" directory
