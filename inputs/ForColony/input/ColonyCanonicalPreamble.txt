@@ -7,13 +7,15 @@ UPDATE_FREQS         ! 0/1=Not updating/updating allele frequency
 2         ! 2/1=Dioecious/Monoecious species
 0         ! 0/1=No inbreeding/inbreeding (This option not compatible with the old version of colony)  <-- don't alter this line---the script uses it to remove this line when necessary
 0         ! 0/1=Diploid species/HaploDiploid species
-0  1      ! 0/1=Polygamy/Monogamy for males & females
-0         ! 0/1=with/without sibship size prior
+POLY_MONO ! 0/1=Polygamy/Monogamy for males & females
+0         ! 0/1=Clone inference =No/Yes
+1         ! 0/1=Scale full sibship=No/Yes
+SIB_PRIOR ! 0/1/2/3=No/Weak/Medium/Strong sibship prior; 4=optimal sibship prior
 0         ! 0/1=Unknown/Known population allele frequency
-NUMRUNS         ! Number of runs
-RUNLENGTH         ! Length of run (1/2/3)
+NUMRUNS   ! Number of runs
+RUNLENGTH ! 1/2/3/4=short/medium/long/very long run
 1         ! 0/1=Monitor method by Iterate#/Time in second
-1         ! Monitor interval in Iterate# / in seconds
+10000     ! Monitor interval in Iterate# / in seconds
 0         ! Windows version
-INFERENCE_METHOD         !  1=Full Likelihood method 0=Pairwise method.
-LIKE_PRECIS         ! Precision 1/2/3=low/medium/High
+INFERENCE_METHOD ! 0/1/2=PairLikelihood score/Fulllikelihood/FPLS
+LIKE_PRECIS  ! 0/1/2/3=Low/Medium/High/Very high precision with Fulllikelihood

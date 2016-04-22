@@ -4,22 +4,25 @@ DROPOUTRATE="0.02";  # I set these here, but it would not be hard to set them el
 MISCALLRATE="0.02"; 
 NumLocToUse=0; 
 UseTheLocsFile=1;
-WeightedAlleFreqs=0;
+WeightedAlleFreqs=1;
 RUN_LENGTH=1;
 LIKE_PRECIS=1;
 NUMRUNS=1;
 INFERENCE_METHOD=1;
 BINARY_BASENAME=colony2s.out;  # be default it uses the new colony
+PolyMono="0 0"
+SibPrior=0
 
 function usage {
     echo Syntax:
-    echo "  $(basename $0)  [-d DropRate -m MisRate -l NumLoc -L -f -r RunLen -p LikPre -n NumRuns -x] DIR  RUN  Inputs  Perm?"
+    echo "  $(basename $0)  [-d DropRate -m MisRate -l NumLoc -L -f -r RunLen -p LikPre -n NumRuns -x -P PolyMono -s SibPrior -o] DIR  RUN  Inputs  Perm?"
     echo
     echo "DIR is the name of a directory where there resides a file named 
 genotypes.txt.  This script creates a new directory named RUN inside
 DIR and processes genotypes.txt into a Colony.dat file in RUN.  This file
 includes the run options.  The Collection name is DIR.  The output name
-is DIR_RUN.  The script counts the number of individuals, etc. 
+is \"output\" because all of it is contained within a specific output directory
+(DIR/RUN).  The script counts the number of individuals, etc. 
 
 Inputs is the path to the input directory where the preamble and
 the postamble live.
@@ -28,21 +31,22 @@ Perm? Is a Boolean to tell us whether we should permute the data with
 sgm_perm (if Perm==1) or not (otherwise).
 
 This script assumes there is a file called the_locs.txt in it
-that has at least the locus names in it.
-
-This script is designed to be run 
+that has at least the locus names in it. And also that it is being
+called from a directory that has a subdirectory called \"bin\"
+that holds the colony excecutable (and the binary for sgm_perm if 
+doing permutations.)
 
 This script also will wire it to:
   - do 1 run.
   - give it a random seed
-  - do a run lenght of 1 (out of 1/2/3)
+  - do a run length of 1 (out of 1/2/3)
   - use likelihood precision of 1 (out of 1/2/3)
 The latter two because we want to have time to do multiple runs.
 
 The optional flag options have the following effects:
 
--d DropRate    :   Rate of dropout errors is set to DropRate
--m MisRate     :   Miscall error rate is set to MisRate
+-d DropRate    :   Rate of dropout errors is set to DropRate (default 0.02)
+-m MisRate     :   Miscall error rate is set to MisRate (default 0.02)
 -l NumLoc      :   Use only the first NumLoc loci in the data set.
                    Note that there must be at least NumLoc loci
                    in genotypes.txt.  Typically you will want to 
@@ -50,14 +54,25 @@ The optional flag options have the following effects:
                    locus names from a file that might not be there.
 -L             :   Don't try to get locus names from the_locs.txt.  Instead
                    just use: Loc_1, Loc_2, ... NumLoc.
--f             :   Sets COLONY to do allele frequency estimation that
+-f             :   Sets COLONY to NOT do allele frequency estimation that
                    takes into account the inferred sibship structure. 
-                   (By default this script doesn't use that).
+                   (This script has Colony use that weighting for alle
+                   freq estimation, by default.).
 -r RunLen      :   Set run length to RunLen (must be 1, 2, or 3). Default is 1.
 -p LikPre      :   Set Likelihood precision to LikPre (must be 1, 2, or 3).
 -n NumRuns     :   Set it up to do NumRuns different runs with the data set.
 -x             :   Set the inference method to Pairwise (0) rather than Full Likelihood (1)
--o             :   Use the old version of Colony (i.e. the 2009/2010 as opposed to 2013/2014 version)
+-P PolyMono    :   Set whether males and females are polygamous.  Quoted string of two 
+                   integers.  First is for males and second is for females.  
+                   0 = polygmous, 1 = monogamous.  Default is both polygamous: (\"0 0\")
+-s SibPrior    :   Set the prior used on the sizes of the sibships.  Default is \"0\", meaning
+                   no prior.  If other choices are used, the settings are somewhat more
+                   complicated. See the colony manual.  Basically you set SibPrior to the 
+                   quoted string that you would want to supply.  For example, if you want a
+                   medium-strength prior with average paternal and maternal sibship sizes 
+                   of 4.2 and 5.3, respectively, then you would set SibPrior to 
+                   the quoted string: \"2 4.2 5.3\".
+-o             :   DEPRECATED. Use the old version of Colony (i.e. the 2009/2010 as opposed to 2013/2014 version)
 
 
 
@@ -71,7 +86,7 @@ if [ $# -eq 0 ]; then
 fi;
 
 # use getopts so you can pass it -n 50, for example. 
-while getopts ":d:m:l:Lfr:p:n:xo" opt; do
+while getopts ":d:m:l:Lfr:p:n:xP:s:o" opt; do
     case $opt in
 	d    )  DROPOUTRATE=$OPTARG;
 	    ;;
@@ -81,7 +96,7 @@ while getopts ":d:m:l:Lfr:p:n:xo" opt; do
 	    ;;
 	L    )  UseTheLocsFile=0;
 	    ;;
-	f    )  WeightedAlleFreqs=1;
+	f    )  WeightedAlleFreqs=0;
 	    ;;
 	r    )  RUN_LENGTH=$OPTARG;
 	    ;;
@@ -90,6 +105,10 @@ while getopts ":d:m:l:Lfr:p:n:xo" opt; do
 	n    )  NUMRUNS=$OPTARG;
 	    ;;
 	x    )  INFERENCE_METHOD=0;
+	    ;;
+  P    )  PolyMono=$OPTARG;
+	    ;;
+  s    )  SibPrior=$OPTARG;
 	    ;;
 	o    )  BINARY_BASENAME=Colony2;
 	    ;;
@@ -163,7 +182,7 @@ echo $NumLocToUse $DROPOUTRATE $MISCALLRATE | awk '
 # bung the canonical files together while processing the data file:
 ( 
     sed "s/COLLECTION/$(basename $DIR)/g;
-         s/OUTFIX/$(basename $DIR)_$RUN/g;
+         s/OUTFIX/output/g;
          s/NUMOFFS/$NUMFISH/g;
          s/NUMLOCS/$NumLocToUse/g;
          s/SEED/$(cl_rand -u 1 1000 9999)/g;
@@ -171,12 +190,15 @@ echo $NumLocToUse $DROPOUTRATE $MISCALLRATE | awk '
          s/NUMRUNS/$NUMRUNS/g;
          s/RUNLENGTH/$RUN_LENGTH/g;
          s/LIKE_PRECIS/$LIKE_PRECIS/g;
-         s/INFERENCE_METHOD/$INFERENCE_METHOD/g; " $PREAMBLE;
+         s/INFERENCE_METHOD/$INFERENCE_METHOD/g; 
+         s/POLY_MONO/$PolyMono/g;
+         s/SIB_PRIOR/$SibPrior/g;
+         " $PREAMBLE;
     cat aaatemploc;
     if [ $PERM -eq 1 ]; then
-	sgm_perm -N  $NUMFISH -L $NUMLOCI < ../genotypes.txt | awk -v N=$NumLocToUse '$1~/Perm_[0-9]/ {printf("%s",$1); for(i=2;i<=N*2+1;i++) printf("\t%s",$i); printf("\n");}'
+	    $CURDIR/bin/sgm_perm -N  $NUMFISH -L $NUMLOCI < ../genotypes.txt | awk -v N=$NumLocToUse '$1~/Perm_[0-9]/ {printf("%s",$1); for(i=2;i<=N*2+1;i++) printf("\t%s",$i); printf("\n");}'
     else
-	awk -v N=$NumLocToUse 'NF>0 {printf("%s",$1); for(i=2;i<=N*2+1;i++) printf("\t%s",$i); printf("\n");}' ../genotypes.txt;
+	    awk -v N=$NumLocToUse 'NF>0 {printf("%s",$1); for(i=2;i<=N*2+1;i++) printf("\t%s",$i); printf("\n");}' ../genotypes.txt;
     fi
     cat $POSTAMBLE;
 ) > Colony2.dat;
