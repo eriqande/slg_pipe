@@ -74,6 +74,14 @@ cd ../../ColonyArea  # change directories to the ColonyArea inside FIRST_TEST
 # 8. At the end of that.  Look at all the output files that you have
 ls Collections/*/FirstColonyRun
 
+# 8.5 Note that if you had wanted to do another set of Colony runs just like those
+#     ones you just did, but have the data permuted amongst all the individuals
+#     in each data set (using Eric's sgm_perm program) you could do that like this:
+#     (the key is the "1" near the end of the line --- that is what tell the script
+#     to permute things)
+./script/RunAllColony.sh -o " -P \"1 0\" -s \"2 2.1 3.2 \" "  FirstColonyRun_Permed  1 7 
+
+
 # 9. If you want to summarize the Genepop HW and LD tests that got done in 
 #    Step #1, you can do the following.  It tells you which summary files
 #    were produced and where to find them.
@@ -105,21 +113,6 @@ Bould006	164	168	0	0	58	84
 ```
 
 Note that missing data are denoted by 0's (zeroes) and alleles are denoted by numbers (it is probably best to denote them by numbers between 100 and 999).
-
-Here is an example analysis on the test data:  
-```sh
-# issue this command in the "arena" directory
-../script/Do_standard_analyses.sh ../test/full_redo_slg_pipe.txt ../test/full_redo_pops.txt ../test/full_redo_loci.txt  FullRedoTest DefaultSettingsStandard.sh
-```
-The output from that tells you what else you can do.
-
-If you want some summaries, try this once it has finished:
-```sh
-# do this in the arena directory
-../script/SummarizeAll.sh FullRedoTest
-```
-
-
 
 
 ## Terms 
