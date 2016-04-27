@@ -143,6 +143,7 @@ CURDIR=$(pwd);
 # this is designed to be run from just above the input directory
 PREAMBLE=$CURDIR/$INP/ColonyCanonicalPreamble.txt;
 POSTAMBLE=$CURDIR/$INP/ColonyCanonicalPostamble.txt;
+CL_RAND=$CURDIR/bin/cl_rand
 
 
 
@@ -185,7 +186,7 @@ echo $NumLocToUse $DROPOUTRATE $MISCALLRATE | awk '
          s/OUTFIX/output/g;
          s/NUMOFFS/$NUMFISH/g;
          s/NUMLOCS/$NumLocToUse/g;
-         s/SEED/$(cl_rand -u 1 1000 9999)/g;
+         s/SEED/$($CL_RAND -u 1 1000 9999)/g;
          s/UPDATE_FREQS/$WeightedAlleFreqs/g;
          s/NUMRUNS/$NUMRUNS/g;
          s/RUNLENGTH/$RUN_LENGTH/g;
