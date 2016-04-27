@@ -45,7 +45,12 @@ cd FIRST_TEST
 # 3. Do the very short structure run across 5 processors
 cd StructureArea/arena
 nohup ../script/ExecuteStructureRuns.sh  5  > BIG_LOG.txt  2>&1 &
-
+```
+At this juncture you have to let those structure runs finish.  That should take only
+a couple of minutes or less.  When they are done you should see see 10 files with names
+like `StructOuput_genos_slg_pipe.txt_dat001_k002_Rep001.txt_f`.  Then you can proceed
+with the following:
+```sh
 # 4. clump the output, create distruct plots of it, and latex a file of results
 # Here we tell it to make each distruct plot 6 inches wide
 cd ../clump_and_distruct
