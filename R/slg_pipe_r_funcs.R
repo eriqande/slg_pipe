@@ -24,7 +24,7 @@ yank_sibs <- function(genos,
                       OutDir) {
   
   # get the pops list
-  pop_tab <- read.table(the_pops, stringsAsFactors = FALSE)
+  pop_tab <- read.table(the_pops, stringsAsFactors = FALSE, sep = "\t")
   pop_vec <- pop_tab$V1
   names(pop_vec) <- pop_vec
   
