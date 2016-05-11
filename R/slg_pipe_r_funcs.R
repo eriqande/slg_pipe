@@ -24,8 +24,8 @@ yank_sibs <- function(genos,
                       OutDir) {
   
   # get the pops list
-  pop_tab <- read.table(the_pops, stringsAsFactors = FALSE, sep = "\t")
-  pop_vec <- pop_tab$V1
+  pop_tab <- read_delim(the_pops, delim = "\t", col_names = FALSE)
+  pop_vec <- unlist(pop_tab$X1)
   names(pop_vec) <- pop_vec
   
   # now grab the inferred siblings out of all the pops and make a data frame of them
@@ -58,6 +58,10 @@ yank_sibs <- function(genos,
   # left join that on there
   tidy2 <- left_join(tidy, nmf_df)
   
+  # make tidy2$Pop a factor with levels ordered the way we want them to be ordered
+  # when we arrange things later
+  tidy2$Pop <- factor(tidy2$Pop, levels = pop_vec)
+  
   # now we just cycle over the Num data sets and each time we 
   # mutate a new column that says whether we keep the individual or not and then
   # filter that down and pull those indivs out of the slg_pipe file, make sure it
@@ -72,12 +76,36 @@ yank_sibs <- function(genos,
     ret
   }
   
+  # we also have to get ready to left join genotypes on there
+  geno_joiner <- gdf
+  names(geno_joiner)[1] <- "indiv"
+  
+  # now cycle over the number of sibyanked data sets
   lapply(1:Num, function(x) {
     tmp <- tidy2 %>% 
       group_by(Pop, sibship_idx) %>%
       mutate(keep = yfunc(n(), Cutoff, non_miss_fract))
     
-    # down here I just need to get pull those indivs out and print the data sets
+    # here we write out the data set
+    towrite <- tmp %>%
+      filter(keep == TRUE) %>%
+      arrange(Pop, indiv) %>%
+      ungroup() %>%
+      select(indiv) %>%
+      left_join(geno_joiner)
+    
+    names(towrite)[1] <- ""
+    
+    write.table(towrite, 
+                file = file.path(OutDir, sprintf("sib-yanked-%03d.txt", x)),
+                quote = FALSE,
+                row.names = FALSE,
+                col.names = TRUE,
+                sep = "\t"
+    )
+    
+    # and then for good measure we send tmp back so that we know who got put where.
+    tmp
   })
   
 }
