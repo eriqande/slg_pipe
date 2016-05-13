@@ -45,7 +45,7 @@ yank_sibs <- function(genos,
     tbl_df
   
   # now get the fraction of missing data in each individual and add that to the tidy frame
-  gdf <- read_delim(genos, delim = "\t")
+  gdf <- read.table(genos, sep = "\t", header = TRUE, stringsAsFactors = FALSE) %>% tbl_df()
   names(gdf)[1] <- ""
   
   gmat <- gdf
@@ -95,6 +95,7 @@ yank_sibs <- function(genos,
       left_join(geno_joiner)
     
     names(towrite)[1] <- ""
+    names(towrite)[seq(3, ncol(towrite), by = 2)] <- names(towrite)[seq(2, ncol(towrite), by = 2)]  # every two columns with the same locus name
     
     write.table(towrite, 
                 file = file.path(OutDir, sprintf("sib-yanked-%03d.txt", x)),
