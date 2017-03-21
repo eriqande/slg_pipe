@@ -15,7 +15,7 @@ git clone https://github.com/eriqande/slg_pipe.git
 
 # then get the external binaries that need to go with it
 # For now just download them in a tarball from here:
-curl -o slg_pipe_binaries.tar.gz  https://dl.dropboxusercontent.com/u/19274778/slg_pipe_binaries-2016-04-21.tar.gz
+wget --output-document=slg_pipe_binaries.tar.gz https://www.dropbox.com/s/xf9gjqdrvosdj8k/slg_pipe_binaries-2016-04-21.tar.gz?dl=1
 
 # extract the tarball
 gunzip slg_pipe_binaries.tar.gz 
