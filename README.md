@@ -4,6 +4,9 @@ This is a collection of shell scripts written by Eric Anderson to ease the task 
 
 Anyone is welcome to use this, though I can't promise that I will be helpful trying to work through any bugs.  We are currently using it on Macs running Yosemite or El Capitan.  It includes some binaries for Mac, and the code is not available in this repository, so don't plan on using it on a different platform.
 
+For a tutorial on how to use it, see 
+[Devon Pearse's Tutorial](https://github.com/eriqande/slg_pipe/blob/master/devon_pipe_primer.md)
+
 
 ## Using it
 Here is how you use it
