@@ -5,17 +5,17 @@ arena/*
 README.html
 
 # here are the paths for all the binaries
-bin/Genepop
-bin/consense
-bin/gendist
-bin/neighbor
-bin/seqboot
-inputs/ForColony/bin/
-inputs/ForStructure/bin/
-inputs/ForStructure/clump_and_distruct/bin/
-inputs/ForStructure/structure2.3.4
-inputs/parallel
-pc/
+#bin/Genepop
+#bin/consense
+#bin/gendist
+#bin/neighbor
+#bin/seqboot
+#inputs/ForColony/bin/
+#inputs/ForStructure/bin/
+#inputs/ForStructure/clump_and_distruct/bin/
+#inputs/ForStructure/structure2.3.4
+#inputs/parallel
+#pc/
 
 # and here is where I store the binary packs.  Don't commit/push those!
 Binary-Packs

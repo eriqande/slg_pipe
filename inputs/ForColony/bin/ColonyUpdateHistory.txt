@@ -1,0 +1,80 @@
+---------------------------------------
+              COLONY 
+          History of Updates
+---------------------------------------
+01/02/2016, V2.0.6.1
+  1) Fixed a couple of minor bugs in Fortran code
+  2) Improved parentage assignment algorithms
+
+12/12/2015, V2.0.5.9
+  1) Fixed a bug in Windows GUI
+  2) Improved MPI parallel computation for many loci
+  3) Added an optimal sibship prior when prior Ne is known
+
+11/02/2015, V2.0.5.8
+  1) Fixed a bug in Windows GUI, and a bug in MPI parallel computation
+  
+08/12/2014, V2.0.5.7
+  1) Enabled the option of full sibship size scaling
+  
+11/11/2014, V2.0.5.6
+  1) Fixed a minor bug
+  2) Improved GUI for Windows
+
+08/10/2014, V2.0.5.5
+  1) Fixed a bug causing circular parentage assignments when individual sex & generation is unknown 
+
+18/09/2014, V2.0.5.4
+  1) Fixed a bug for monoecious with selfing
+
+31/08/2014, V2.0.5.3
+  1) Fixed a couple of bugs
+  2) Introduced full-sib size scaling for biallelic markers to reduce large sibship split
+  3) Set Ewen's sampling formula as default for sibship prior
+  4) Inference of duplicated individuals (clones)
+  
+14/05/2014, V2.0.5.2
+  1) Fixed a couple of bugs
+  2) Computational efficiency improvements, especially for loci with no mistypings
+
+27/02/2014, V2.0.5.1
+  1) Fixed a couple of bugs
+  2) Introduced expire date (1 year valid) to avoid too many versions in use
+
+30/10/2013, V2.0.5.0
+  1) Allow sibship & parentage inference for haploid offspring
+  2) Fixed a bug in likelihood calculation
+
+23/09/2013, V2.0.4.7
+  1) Slight modification of scaling scheme to improve inference accuracy and computational efficiency 
+  2) Added inferences of mistyping rates conditional of the reconstructed pedigree
+  
+04/09/2013, V2.0.4.6
+  1) Efficiency improvements for SNPs and dominant markers
+  2) Fixed a couple of minor bugs
+  
+09/07/2013, V2.0.4.5
+  1) Lists inferred parent pairs for each offspring from FL method, when both male and female candidates exist
+  2) Fixed a bug in calculating and using inbreeding coefficient
+
+21/05/2013, V2.0.4.4
+  1) Fixed a bug for dominant markers
+
+08/05/2013, V2.0.4.3
+  1) Fixed a bug for dominant markers and very large full sib families (>1000 siblings per family)
+  2) Improved parentage assignment algorithm
+
+11/04/2013, V2.0.4.2
+  1) Fixed a bug which causes poor MCMC convergence for monoecious with selfing and known sibship/parentage
+  
+18/03/2013, V2.0.4.1
+  1) Typos in Windows GUI, and users guide
+  2) Fixed a bug which aborts the run for a locus with no genotype data
+  3) Checking whether an offspring has no data at all
+
+20/02/2013, V2.0.4.0
+  1) Integrated a simulation module in GUI, allowing for serial and parallel run
+  2) Colony program is not installed, by default, into the "program files" folder, which can cause security issues with Windows 7. The default installation location now is "c:\ZSL\Colony\"
+  3) Started recording and documenting update history
+
+01/05/2008, V2.0.0.0: Original code

@@ -17,6 +17,9 @@ Ghostscript on your Mac, and you need to have LaTeX if you want to make multipag
 documents with a lot of distruct plots.  So, first install MacTex from
 https://tug.org/mactex/mactex-download.html
 
+You also need to have an installation of R on your system, and `Rscript` must be
+on your PATH.
+
 
 
 ```sh
@@ -25,8 +28,7 @@ git clone https://github.com/eriqande/slg_pipe.git
 
 # then get the external binaries that need to go with it
 # For now just download them in a tarball from here:
-wget --output-document=slg_pipe_binaries.tar.gz https://www.dropbox.com/s/t52fmmmqhsw23it/slg_pipe_binaries-2022-12-07-x86_64.tar.gz?dl=1
-
+wget --output-document=slg_pipe_binaries.tar.gz https://www.dropbox.com/s/y2j9v0r2787tyld/slg_pipe_binaries-2022-12-07-x86_64.tar.gz?dl=1
 
 #### NOTE: IF YOU WANT OLDER i386 VERSIONS OF THE 
 #### BINARIES (IF YOU HAVE A VERY OLD MAC)
@@ -65,7 +67,8 @@ cd StructureArea/arena
 nohup ../script/ExecuteStructureRuns.sh  5  > BIG_LOG.txt  2>&1 &
 ```
 At this juncture you have to let those structure runs finish.  That should take only
-a couple of minutes or less.  When they are done you should see see 10 files with names
+a couple of minutes or less (it takes a second or two on my new M1 Mac).
+When they are done you should see see 10 files with names
 like `StructOuput_genos_slg_pipe.txt_dat001_k002_Rep001.txt_f`.  Then you can proceed
 with the following:
 ```sh
@@ -86,12 +89,21 @@ open first_test_struct.pdf
 #    is assumed to consist of a single cohort.  Here we spread the effort across 7 
 #    processors (if you machine has at least that many) and we make males 
 #    monogamous and females polygamous, and we use the sibship-size-prior (-s)
-#    of medium strenth (2) with average paternal sibship size of 2.1 and average
+#    of medium strength (2) with average paternal sibship size of 2.1 and average
 #    maternal sibship size of 3.2.  All the output goes into a directory named
 #    FirstColonyRun inside each populations subdirectory in the directory called
 #    "Collections" which is inside the ColonyArea.  This will take a couple of minutes
-#    if you have a lot of processors.  More if you don't
+#    if you have a lot of processors.  More if you don't.
+
+#    Note, this is using an older version of Colony which has "expired". To be able
+#    to run it, we have to set the date in our shell back to a time in the 2018's.  
+
 cd ../../ColonyArea  # change directories to the ColonyArea inside FIRST_TEST
+
+sudo date 0613182785  # change the date (requires admin privileges) or you
+                      # could change the date
+                      # to June 13, 2018
+                      
 ./script/RunAllColony.sh -o " -P \"1 0\" -s \"2 2.1 3.2 \" "  FirstColonyRun  0 7 
 
 # 8. At the end of that.  Look at all the output files that you have
