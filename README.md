@@ -109,6 +109,8 @@ following block.  Miraculously, `sgm_perm` runs on 64 bit...
 ./script/RunAllColony.sh -o " -P \"1 0\" -s \"2 2.1 3.2 \" "  FirstColonyRun_Permed  1 7 
 ```
 
+**When you are done running the Colony Scripts, be sure to set your computer's clock back to the correct time.**
+
 Finally you can make summaries of a lot of things:
 
 ```sh
