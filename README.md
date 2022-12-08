@@ -6,16 +6,31 @@ Anyone is welcome to use this, though I can't promise that I will be helpful try
 
 
 ## Using it
-Here is how you use it
+
+First you have to get it and its dependencies.
+
+Most of the dependencies are obtained in the steps below, but you do need to have
+Ghostscript on your Mac, and you need to have LaTeX if you want to make multipage
+documents with a lot of distruct plots.  So, first install MacTex from
+https://tug.org/mactex/mactex-download.html
+
 
 
 ```sh
-# First, get it:
+# Now, get slg_pipe:
 git clone https://github.com/eriqande/slg_pipe.git
 
 # then get the external binaries that need to go with it
 # For now just download them in a tarball from here:
-wget --output-document=slg_pipe_binaries.tar.gz https://www.dropbox.com/s/xf9gjqdrvosdj8k/slg_pipe_binaries-2016-04-21.tar.gz?dl=1
+wget --output-document=slg_pipe_binaries.tar.gz https://www.dropbox.com/s/t52fmmmqhsw23it/slg_pipe_binaries-2022-12-07-x86_64.tar.gz?dl=1
+
+
+#### NOTE: IF YOU WANT OLDER i386 VERSIONS OF THE 
+#### BINARIES (IF YOU HAVE A VERY OLD MAC)
+#### THEN UNCOMMENT THE FOLLOWING LINE AND DO IT
+#### INSTEAD
+#wget --output-document=slg_pipe_binaries.tar.gz https://www.dropbox.com/s/xf9gjqdrvosdj8k/slg_pipe_binaries-2016-04-21.tar.gz?dl=1
+
 
 # extract the tarball
 gunzip slg_pipe_binaries.tar.gz 
