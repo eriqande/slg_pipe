@@ -20,30 +20,12 @@ https://tug.org/mactex/mactex-download.html
 You also need to have an installation of R on your system, and `Rscript` must be
 on your PATH.
 
-
+We used to store many of the binaries in an archive on Dropbox, but I have
+now just put them in the repo. This simplifies installation.
 
 ```sh
 # Now, get slg_pipe:
 git clone https://github.com/eriqande/slg_pipe.git
-
-# then get the external binaries that need to go with it
-# For now just download them in a tarball from here:
-wget --output-document=slg_pipe_binaries.tar.gz https://www.dropbox.com/s/y2j9v0r2787tyld/slg_pipe_binaries-2022-12-07-x86_64.tar.gz?dl=1
-
-#### NOTE: IF YOU WANT OLDER i386 VERSIONS OF THE 
-#### BINARIES (IF YOU HAVE A VERY OLD MAC)
-#### THEN UNCOMMENT THE FOLLOWING LINE AND DO IT
-#### INSTEAD
-#wget --output-document=slg_pipe_binaries.tar.gz https://www.dropbox.com/s/xf9gjqdrvosdj8k/slg_pipe_binaries-2016-04-21.tar.gz?dl=1
-
-
-# extract the tarball
-gunzip slg_pipe_binaries.tar.gz 
-tar -xvf slg_pipe_binaries.tar 
-
-# now copy the binaries into the directory tree of the 
-# repository using rsync
-rsync -avh slg_pipe_binaries/* slg_pipe
 
 
 # now you should be good to go.  Enter the "arena" directory
