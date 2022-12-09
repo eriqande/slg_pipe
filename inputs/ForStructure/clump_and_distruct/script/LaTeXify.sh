@@ -79,13 +79,6 @@ KS=$2
 echo boing | awk '
 {printf("\\documentclass[11pt]{article} \
 \\usepackage{graphicx} \
-\\usepackage{amssymb} \
-\\usepackage{epstopdf} \
-\\usepackage{amsfonts} \
-\\usepackage{natbib} \
-\\usepackage{subfigure} \
-\\usepackage{pdfsync} \
-\\usepackage{xspace} \
  \
 \\textwidth = 6.5 in \
 \\textheight = 9 in \
